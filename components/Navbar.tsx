@@ -16,8 +16,8 @@ interface NavbarProps {
 const NavLink: React.FC<{ children: React.ReactNode, onClick?: () => void, href?: string, active?: boolean, isDark: boolean }> = ({ children, onClick, href, active, isDark }) => {
   const content = (
     <div className={`relative text-sm font-semibold transition-colors group flex items-center gap-2 cursor-pointer py-2 ${active
-        ? 'text-indigo-500'
-        : (isDark ? 'text-slate-400 hover:text-white' : 'text-slate-600 hover:text-indigo-600')
+      ? 'text-indigo-500'
+      : (isDark ? 'text-slate-400 hover:text-white' : 'text-slate-600 hover:text-indigo-600')
       }`}>
       {children}
       <span className={`hidden lg:block absolute -bottom-1 left-0 h-[2px] gradient-bg transition-all duration-300 ${active ? 'w-full' : 'w-0 group-hover:w-full'}`} />
@@ -48,8 +48,8 @@ export const Navbar: React.FC<NavbarProps> = ({ scrolled, theme, activeView, tog
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 py-4 ${scrolled
-          ? (isDark ? 'bg-slate-950 border-b border-white/5 shadow-2xl' : 'bg-white border-b border-slate-200 shadow-md')
-          : 'bg-transparent border-b border-transparent shadow-none'
+        ? (isDark ? 'bg-slate-950 border-b border-white/5 shadow-2xl' : 'bg-white border-b border-slate-200 shadow-md')
+        : 'bg-transparent border-b border-transparent shadow-none'
         }`}
     >
       <div className="container mx-auto px-6 flex items-center justify-between">
@@ -58,9 +58,8 @@ export const Navbar: React.FC<NavbarProps> = ({ scrolled, theme, activeView, tog
           onClick={() => { onShowHome(); setIsMenuOpen(false); }}
         >
           <div className="w-10 h-10 gradient-bg rounded-xl flex items-center justify-center shadow-lg shadow-indigo-500/20 group-hover:scale-110 transition-transform">
-            <img src="/public/img/favicon.png" className="w-8 h-8" alt="Ícone" />
+            <img src="/img/favicon.png" className="w-8 h-8" alt="Ícone" />
           </div>
-
           <span className={`text-2xl font-bold font-display tracking-tight transition-colors ${isDark ? 'text-white' : 'text-slate-900'}`}>
             Nexus<span className="text-indigo-500">Dev</span>
           </span>

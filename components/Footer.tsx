@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Zap, Instagram, Github, Mail, Phone, ArrowUpRight, Globe, ShieldCheck } from 'lucide-react';
+import { Instagram, Github, Mail, Phone, ArrowUpRight, Globe, ShieldCheck } from 'lucide-react';
 
 interface FooterProps {
   theme: 'dark' | 'light';
@@ -44,7 +44,10 @@ export const Footer: React.FC<FooterProps> = ({ theme, onShowHome, onShowPortfol
                 onClick={onShowHome}
               >
                 <div className="w-12 h-12 gradient-bg rounded-2xl flex items-center justify-center shadow-lg shadow-indigo-500/20 group-hover/logo:rotate-12 transition-transform duration-500">
-                  <Zap className="text-white w-6 h-6 fill-current" />
+                  <div className="w-10 h-10 gradient-bg rounded-xl flex items-center justify-center shadow-lg shadow-indigo-500/20 group-hover:scale-110 transition-transform">
+                    <img src="/img/favicon.png" className="w-8 h-8" alt="Ícone" />
+                  </div>
+
                 </div>
                 <div className="flex flex-col">
                   <span className="text-2xl font-black font-display tracking-tighter leading-none">
@@ -66,8 +69,8 @@ export const Footer: React.FC<FooterProps> = ({ theme, onShowHome, onShowPortfol
                     target="_blank"
                     rel="noreferrer"
                     className={`w-11 h-11 rounded-xl flex items-center justify-center border transition-all duration-300 group/social ${isDark
-                        ? 'bg-white/5 border-white/10 text-white hover:border-indigo-500 hover:bg-indigo-500/10'
-                        : 'bg-white border-slate-200 text-slate-700 hover:border-indigo-400 hover:bg-indigo-50'
+                      ? 'bg-white/5 border-white/10 text-white hover:border-indigo-500 hover:bg-indigo-500/10'
+                      : 'bg-white border-slate-200 text-slate-700 hover:border-indigo-400 hover:bg-indigo-50'
                       }`}
                   >
                     <social.icon size={18} className="group-hover/social:scale-110 transition-transform" />

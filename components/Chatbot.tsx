@@ -234,7 +234,7 @@ export const Chatbot: React.FC<ChatbotProps> = ({ isOpen, setIsOpen, initialPack
             <div className="p-6 gradient-bg flex items-center justify-between text-white">
               <div className="flex items-center gap-3">
                 <div className="relative w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
-                  <img src="/public/img/favicon.png" className="w-8 h-8" alt="Ícone" />
+                  <img src="/img/favicon.png" className="w-8 h-8" alt="Ícone" />
 
                   {/* Bolinha verde de status online */}
                   <span className="absolute bottom-0 right-0 block w-3 h-3 bg-green-500 border-2 border-white rounded-full" />
