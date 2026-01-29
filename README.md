@@ -1,21 +1,39 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# NexusDev - Soluções Web de Alto Impacto 🚀
 
-# Run and deploy your AI Studio app
+NexusDev é uma agência digital focada em criar **sites e landing pages modernas, rápidas e responsivas** para negócios que querem crescer no mundo digital.
 
-This contains everything you need to run your app locally.
+---
 
-View your app in AI Studio: https://ai.studio/apps/drive/1b6aVwer81ZQpVeSg5Y2HC-6P3OSd-QRM
+## 🌐 Projeto Online
 
-## Run Locally
+Acesse o site: https://nexus-dev-two.vercel.app/
 
-**Prerequisites:**  Node.js
+---
 
+## 💻 Tecnologias Utilizadas
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
-# NexusDev
+- **React** + **TypeScript**
+- **Tailwind CSS**
+- **Framer Motion** para animações
+- **Lucide Icons** para ícones modernos
+- **Vite** como bundler
+- Responsivo e mobile-first
+- 
+---
+
+## ⚡ Funcionalidades
+
+- Sites e landing pages totalmente responsivos  
+- Código limpo e organizado  
+- Experiência de usuário (UX) otimizada  
+- Animações suaves com Framer Motion  
+- Seções: Sobre, Serviços, Depoimentos, FAQ, Portfólio  
+- Chat integrado para contato rápido  
+
+---
+
+## 🚀 Como Rodar Localmente
+
+1. Clone o repositório:
+```bash
+git clone https://github.com/MiguesFerreira/NexusDev.git
