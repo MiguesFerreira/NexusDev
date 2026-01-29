@@ -1,7 +1,6 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Zap } from 'lucide-react';
 
 export const SplashScreen: React.FC = () => {
   return (
@@ -24,7 +23,9 @@ export const SplashScreen: React.FC = () => {
           }}
           className="w-20 h-20 gradient-bg rounded-2xl flex items-center justify-center shadow-[0_0_40px_rgba(99,102,241,0.4)] mb-6"
         >
-          <Zap className="text-white w-10 h-10 fill-current" />
+          <div className="w-16 h-16 gradient-bg rounded-xl flex items-center justify-center shadow-lg shadow-indigo-500/20 group-hover:scale-110 transition-transform">
+            <img src="/public/img/favicon.png" className="w-15 h-15" alt="Ícone" />
+          </div>
         </motion.div>
         
         <motion.div

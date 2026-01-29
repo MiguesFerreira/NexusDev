@@ -1,7 +1,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { MessageSquare, X, Send, ChevronRight, ArrowLeft, CheckCircle2, Plus, Check, Zap } from 'lucide-react';
+import { MessageSquare, X, Send, ChevronRight, ArrowLeft, CheckCircle2, Plus, Check } from 'lucide-react';
 import { ChatStep } from '../types';
 
 interface Message {
@@ -42,7 +42,7 @@ const PACKAGE_INFO: Record<string, any> = {
     description: 'Solução premium para negócios que querem escalar e automatizar.',
     bullets: ['Site desenvolvido em React', 'Estrutura escalável', 'Layout de alto nível', 'Alta performance', 'Chat de agendamento incluso'],
     tech: 'React Engine',
-    price: 4000,
+    price: 3500,
     maint: 500,
     note: 'Ideal para empresas que pensam grande e querem tecnologia de ponta.'
   }
@@ -50,7 +50,7 @@ const PACKAGE_INFO: Record<string, any> = {
 
 const EXTRA_INFO = {
   title: '➕ Extra – Sistema de Agendamento',
-  price: 1000,
+  price: 500,
   maint: 200,
   description: 'Chat inteligente com coleta de dados e agendamento automático via WhatsApp.'
 };
@@ -81,7 +81,7 @@ export const Chatbot: React.FC<ChatbotProps> = ({ isOpen, setIsOpen, initialPack
   useEffect(() => {
     if (isOpen && messages.length === 0) {
       addMessage('bot', 'Olá! Sou o assistente de negócios da Nexus Dev. 🚀');
-      
+
       if (initialPackage) {
         if (initialPackage === 'Extra') {
           addMessage('bot', 'Vi que sua empresa se interessou pelo Módulo de Agendamento Automático!');
@@ -90,7 +90,7 @@ export const Chatbot: React.FC<ChatbotProps> = ({ isOpen, setIsOpen, initialPack
           addMessage('bot', `Vi que sua empresa se interessou pelo ${initialPackage}!`);
           setSelectedService(initialPackage);
         }
-        
+
         setTimeout(() => {
           addMessage('bot', 'Antes de vermos os detalhes e valores, qual o nome da sua empresa?');
           setStep(ChatStep.ENTERING_NAME);
@@ -112,7 +112,7 @@ export const Chatbot: React.FC<ChatbotProps> = ({ isOpen, setIsOpen, initialPack
     e.preventDefault();
     if (!companyName.trim()) return;
     addMessage('user', companyName);
-    
+
     setTimeout(() => {
       if (selectedService || addExtra) {
         addMessage('bot', `Excelente, ${companyName}! Aqui estão os detalhes técnicos e investimento:`);
@@ -144,7 +144,7 @@ export const Chatbot: React.FC<ChatbotProps> = ({ isOpen, setIsOpen, initialPack
     const pkg = PACKAGE_INFO[selectedService];
     const totalInvest = addExtra ? pkg.price + EXTRA_INFO.price : pkg.price;
     const text = `Olá Nexus Dev! Represento a empresa ${companyName} e gostaríamos de fechar o ${selectedService}${addExtra ? ' + Sistema de Agendamento' : ''}. Investimento: R$ ${totalInvest.toLocaleString('pt-BR')}.`;
-    
+
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, '_blank');
   };
 
@@ -176,16 +176,16 @@ export const Chatbot: React.FC<ChatbotProps> = ({ isOpen, setIsOpen, initialPack
               </li>
             ))}
           </ul>
-          
+
           {!selectedService.includes('React') && (
             <div className={`mt-4 p-3 rounded-xl border transition-all ${addExtra ? 'bg-indigo-500/20 border-indigo-500/50' : 'bg-slate-900/50 border-white/5'}`}>
               <div className="flex items-center justify-between gap-3">
                 <div className="flex-grow">
                   <p className="text-[10px] font-bold text-indigo-400 uppercase tracking-widest">Upgrade Opcional</p>
                   <p className="text-[11px] font-bold text-white">Módulo de Agendamento</p>
-                  <p className="text-[9px] text-slate-500">+ R$ 1.000,00</p>
+                  <p className="text-[9px] text-slate-500">+ R$ 500,00</p>
                 </div>
-                <button 
+                <button
                   onClick={() => setAddExtra(!addExtra)}
                   className={`w-10 h-10 rounded-lg flex items-center justify-center transition-all ${addExtra ? 'bg-indigo-500 text-white shadow-lg' : 'bg-slate-800 text-slate-400 hover:text-white'}`}
                 >
@@ -197,8 +197,8 @@ export const Chatbot: React.FC<ChatbotProps> = ({ isOpen, setIsOpen, initialPack
 
           <div className="border-t border-white/5 pt-3 mt-4">
             <p className="text-[10px] uppercase font-bold text-slate-500 mb-1">Tecnologias: {pkg.tech}{addExtra ? ' + Extra Tech' : ''}</p>
-            <p className="text-lg font-black text-white">Inv: R$ {totalPrice.toLocaleString('pt-BR')},00</p>
-            <p className="text-[10px] text-indigo-500 font-bold">Maint: R$ {totalMaint.toLocaleString('pt-BR')},00/mês</p>
+            <p className="text-lg font-black text-white">Investimento: R$ {totalPrice.toLocaleString('pt-BR')},00</p>
+            <p className="text-[10px] text-indigo-500 font-bold">Manutenção: R$ {totalMaint.toLocaleString('pt-BR')},00/mês</p>
           </div>
         </div>
 
@@ -216,7 +216,7 @@ export const Chatbot: React.FC<ChatbotProps> = ({ isOpen, setIsOpen, initialPack
 
   return (
     <>
-      <button 
+      <button
         onClick={() => setIsOpen(true)}
         className="fixed bottom-20 right-8 w-14 h-14 gradient-bg rounded-full flex items-center justify-center text-white shadow-2xl z-[40] hover:scale-110 active:scale-90 transition-transform"
       >
@@ -233,13 +233,20 @@ export const Chatbot: React.FC<ChatbotProps> = ({ isOpen, setIsOpen, initialPack
           >
             <div className="p-6 gradient-bg flex items-center justify-between text-white">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
-                  <Zap className="w-6 h-6" />
+                <div className="relative w-10 h-10 rounded-full bg-white/20 flex items-center justify-center">
+                  <img src="/public/img/favicon.png" className="w-8 h-8" alt="Ícone" />
+
+                  {/* Bolinha verde de status online */}
+                  <span className="absolute bottom-0 right-0 block w-3 h-3 bg-green-500 border-2 border-white rounded-full" />
                 </div>
                 <div>
-                  <h3 className="font-bold">Nexus Intelligence</h3>
+                  <h3 className="font-bold flex items-center gap-2">
+                    NexusIA
+                  </h3>
+                  <span className="text-xs text-green-500 font-semibold">online</span>
                 </div>
               </div>
+
               <button onClick={() => { setIsOpen(false); resetChat(); }} className="p-2 hover:bg-white/10 rounded-full transition-colors">
                 <X className="w-6 h-6" />
               </button>
@@ -253,11 +260,10 @@ export const Chatbot: React.FC<ChatbotProps> = ({ isOpen, setIsOpen, initialPack
                   animate={{ opacity: 1, x: 0 }}
                   className={`flex ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
                 >
-                  <div className={`max-w-[85%] p-4 rounded-2xl text-sm leading-relaxed ${
-                    msg.sender === 'user' 
-                      ? 'bg-indigo-600 text-white rounded-tr-none shadow-lg' 
-                      : 'bg-slate-800 text-slate-200 rounded-tl-none border border-white/5'
-                  }`}>
+                  <div className={`max-w-[85%] p-4 rounded-2xl text-sm leading-relaxed ${msg.sender === 'user'
+                    ? 'bg-indigo-600 text-white rounded-tr-none shadow-lg'
+                    : 'bg-slate-800 text-slate-200 rounded-tl-none border border-white/5'
+                    }`}>
                     {msg.text}
                   </div>
                 </motion.div>

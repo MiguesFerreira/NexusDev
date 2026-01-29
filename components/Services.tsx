@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Check, Zap, Globe, Cpu, Layout, ArrowUpRight, MessageSquareCode } from 'lucide-react';
@@ -9,6 +8,7 @@ interface ServicesProps {
   onPackageClick: (pkg: string) => void;
 }
 
+// --- PACKAGES atualizado ---
 const PACKAGES: ServicePackage[] = [
   {
     id: 'basico',
@@ -41,25 +41,27 @@ const PACKAGES: ServicePackage[] = [
   {
     id: 'react',
     name: 'Pacote React',
-    description: 'Tecnologia de ponta: SPA escalável com layout premium e chat de agendamento.',
+    description: 'SPA moderno e escalável com design premium, funcionalidades avançadas e chat de agendamento integrado.',
     technologies: ['React Engine', 'Tailwind CSS', 'Dynamic Content'],
-    price: 'R$ 4.000,00',
+    price: 'R$ 3.500,00',
     maintenance: 'R$ 500,00/mês',
-    icon: <Cpu className="w-8 h-8" />
+    icon: <Cpu className="w-8 h-8" />,
+    isPopular: true // habilita a badge “Mais Seguro”
   }
 ];
 
 const EXTRA_PACKAGE: ServicePackage = {
   id: 'agendamento',
-  name: 'Extra – Agendamento (React)',
+  name: 'Extra – Agendamento Automático',
   description: 'Sistema completo de automação 24h para converter visitantes em agendamentos diretos.',
   technologies: ['Chat Inteligente', 'WhatsApp Sync', 'Auto-Data Collection'],
-  price: 'R$ 1.000,00',
+  price: 'R$ 500,00',
   maintenance: 'R$ 200,00/mês',
   icon: <MessageSquareCode className="w-8 h-8" />,
   isExtra: true
 };
 
+// --- PackageCard atualizado ---
 interface PackageCardProps {
   pkg: ServicePackage;
   idx: number;
@@ -68,51 +70,61 @@ interface PackageCardProps {
   onPackageClick: (pkg: string) => void;
 }
 
-const PackageCard: React.FC<PackageCardProps> = ({ pkg, idx, compact = false, isDark, onPackageClick }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 30 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    whileHover={{
-      y: -20,
-      scale: 1.04,
-      transition: { type: "spring", stiffness: 400, damping: 25 }
-    }}
-    viewport={{ once: true }}
-    className={`relative flex flex-col rounded-[2.5rem] transition-colors duration-300 group border z-10 hover:z-20 ${compact ? 'p-6 max-w-lg mx-auto' : 'p-8'
-      } ${pkg.isPopular
-        ? (isDark ? 'bg-indigo-950/30 border-indigo-500/50 shadow-2xl' : 'bg-white border-indigo-200 shadow-xl')
-        : (isDark ? 'bg-slate-900/40 border-white/5 hover:border-indigo-500/30' : 'bg-white border-slate-200 shadow-sm')
-      }`}
-  >
-    {pkg.isPopular && (
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 px-5 py-2 rounded-full gradient-bg text-[10px] font-black uppercase tracking-widest text-white shadow-xl z-30">
-        Mais Procurado
+const PackageCard: React.FC<PackageCardProps> = ({ pkg, idx, compact = false, isDark, onPackageClick }) => {
+  // Define o texto da badge apenas para pacotes com destaque
+  let badgeText = '';
+  if (pkg.isPopular) {
+    if (pkg.id === 'profissional') badgeText = 'Mais Procurado';
+    else if (pkg.id === 'react') badgeText = 'Mais Seguro'; // Pacote React
+  }
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      whileHover={{
+        y: -20,
+        scale: 1.04,
+        transition: { type: "spring", stiffness: 400, damping: 25 }
+      }}
+      viewport={{ once: true }}
+      className={`relative flex flex-col rounded-[2.5rem] transition-colors duration-300 group border z-10 hover:z-20 ${compact ? 'p-6 max-w-lg mx-auto' : 'p-8'
+        } ${pkg.isPopular
+          ? (isDark ? 'bg-indigo-950/30 border-indigo-500/50 shadow-2xl' : 'bg-white border-indigo-200 shadow-xl')
+          : (isDark ? 'bg-slate-900/40 border-white/5 hover:border-indigo-500/30' : 'bg-white border-slate-200 shadow-sm')
+        }`}
+    >
+      {pkg.isPopular && badgeText && (
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 px-5 py-2 rounded-full gradient-bg text-[10px] font-black uppercase tracking-widest text-white shadow-xl z-30">
+          {badgeText}
+        </div>
+      )}
+
+      <div className={`${compact ? 'mb-4 p-2' : 'mb-6 p-4'} rounded-2xl inline-block transition-transform duration-500 group-hover:scale-110 ${pkg.isPopular ? 'bg-indigo-500 text-white' : (isDark ? 'bg-slate-800 text-indigo-400' : 'bg-indigo-50 text-indigo-600')}`}>
+        {React.cloneElement(pkg.icon as React.ReactElement, { className: compact ? "w-6 h-6" : "w-8 h-8" })}
       </div>
-    )}
 
-    <div className={`${compact ? 'mb-4 p-2' : 'mb-6 p-4'} rounded-2xl inline-block transition-transform duration-500 group-hover:scale-110 ${pkg.isPopular ? 'bg-indigo-500 text-white' : (isDark ? 'bg-slate-800 text-indigo-400' : 'bg-indigo-50 text-indigo-600')}`}>
-      {React.cloneElement(pkg.icon as React.ReactElement, { className: compact ? "w-6 h-6" : "w-8 h-8" })}
-    </div>
+      <h3 className={`${compact ? 'text-lg' : 'text-xl'} font-bold mb-2 group-hover:text-indigo-400 transition-colors ${isDark ? 'text-white' : 'text-slate-900'}`}>{pkg.name}</h3>
+      <p className={`text-sm mb-6 leading-relaxed flex-grow group-hover:text-slate-300 transition-colors ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>{pkg.description}</p>
 
-    <h3 className={`${compact ? 'text-lg' : 'text-xl'} font-bold mb-2 group-hover:text-indigo-400 transition-colors ${isDark ? 'text-white' : 'text-slate-900'}`}>{pkg.name}</h3>
-    <p className={`text-sm mb-6 leading-relaxed flex-grow group-hover:text-slate-300 transition-colors ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>{pkg.description}</p>
-
-    <div className={`mt-auto pt-6 border-t ${isDark ? 'border-white/5' : 'border-slate-100'}`}>
-      <div className="flex flex-col mb-6">
-        <span className={`${compact ? 'text-2xl' : 'text-3xl'} font-black transition-transform origin-left group-hover:scale-105 ${isDark ? 'text-white' : 'text-slate-900'}`}>{pkg.price}</span>
-        <span className="text-[9px] font-bold uppercase tracking-widest text-indigo-500 mt-1">Manutenção: {pkg.maintenance}</span>
+      <div className={`mt-auto pt-6 border-t ${isDark ? 'border-white/5' : 'border-slate-100'}`}>
+        <div className="flex flex-col mb-6">
+          <span className={`${compact ? 'text-2xl' : 'text-3xl'} font-black transition-transform origin-left group-hover:scale-105 ${isDark ? 'text-white' : 'text-slate-900'}`}>{pkg.price}</span>
+          <span className="text-[9px] font-bold uppercase tracking-widest text-indigo-500 mt-1">Manutenção: {pkg.maintenance}</span>
+        </div>
+        <button
+          onClick={() => onPackageClick(pkg.isExtra ? 'Extra' : pkg.name)}
+          className={`w-full py-4 rounded-xl font-bold flex items-center justify-center gap-2 transition-all ${pkg.isPopular ? 'gradient-bg text-white shadow-lg' : (isDark ? 'bg-white/5 text-white hover:bg-white/10' : 'bg-slate-100 text-slate-800 hover:bg-indigo-500 hover:text-white')
+            }`}
+        >
+          Selecionar <ArrowUpRight size={18} />
+        </button>
       </div>
-      <button
-        onClick={() => onPackageClick(pkg.isExtra ? 'Extra' : pkg.name)}
-        className={`w-full py-4 rounded-xl font-bold flex items-center justify-center gap-2 transition-all ${pkg.isPopular ? 'gradient-bg text-white shadow-lg' : (isDark ? 'bg-white/5 text-white hover:bg-white/10' : 'bg-slate-100 text-slate-800 hover:bg-indigo-500 hover:text-white')
-          }`}
-      >
-        Selecionar <ArrowUpRight size={18} />
-      </button>
-    </div>
-  </motion.div>
-);
+    </motion.div>
+  );
+};
 
+// --- Services permanece igual ---
 export const Services: React.FC<ServicesProps> = ({ theme, onPackageClick }) => {
   const isDark = theme === 'dark';
 

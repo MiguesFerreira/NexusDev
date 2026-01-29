@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Zap, Instagram, Linkedin, Github, Mail, Phone, ArrowUpRight, Globe, ShieldCheck } from 'lucide-react';
+import { Zap, Instagram, Github, Mail, Phone, ArrowUpRight, Globe, ShieldCheck } from 'lucide-react';
 
 interface FooterProps {
   theme: 'dark' | 'light';
@@ -58,7 +58,6 @@ export const Footer: React.FC<FooterProps> = ({ theme, onShowHome, onShowPortfol
               <div className="flex gap-4">
                 {[
                   { icon: Instagram, href: "https://instagram.com/nexusdev.br" },
-                  { icon: Linkedin, href: "https://linkedin.com/in/miguelferreira18" },
                   { icon: Github, href: "https://github.com/miguelferreira18" }
                 ].map((social, i) => (
                   <a
