@@ -17,6 +17,8 @@ import { DeviceShowcase } from './components/DeviceShowcase';
 import { Process } from './components/Process';
 import { Guarantees } from './components/Guarantees';
 import { Roadmap } from './components/Roadmap';
+import { TechCarousel } from './components/TechCarousel';
+import { Questionnaire } from './components/Questionnaire';
 
 import { AnimatePresence, motion, useMotionValue } from 'framer-motion';
 
@@ -74,6 +76,8 @@ const App: React.FC = () => {
   const [currentView, setCurrentView] = useState<'home' | 'portfolio' | 'metodologia'>('home');
   const [chatInitialPackage, setChatInitialPackage] = useState<string | null>(null);
   const [isChatOpen, setIsChatOpen] = useState(false);
+  const [isQuestionnaireOpen, setIsQuestionnaireOpen] = useState(false);
+  const [questionnaireData, setQuestionnaireData] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -104,6 +108,12 @@ const App: React.FC = () => {
     }
   };
 
+  const handleQuestionnaireComplete = (data: any) => {
+    setQuestionnaireData(data);
+    setIsQuestionnaireOpen(false);
+    setIsChatOpen(true);
+  };
+
   const isDark = theme === 'dark';
 
   return (
@@ -113,6 +123,13 @@ const App: React.FC = () => {
       <AnimatePresence>
         {loading && <SplashScreen />}
       </AnimatePresence>
+
+      <Questionnaire
+        isOpen={isQuestionnaireOpen}
+        onClose={() => setIsQuestionnaireOpen(false)}
+        onComplete={handleQuestionnaireComplete}
+        theme={theme}
+      />
 
       <LightweightBackground />
 
@@ -131,13 +148,18 @@ const App: React.FC = () => {
 
           {currentView === 'home' && (
             <motion.div key="home" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-              <Hero theme={theme} onShowMetodologia={() => navigateTo('metodologia')} />
+              <Hero
+                theme={theme}
+                onShowMetodologia={() => navigateTo('metodologia')}
+                onOpenQuestionnaire={() => setIsQuestionnaireOpen(true)}
+              />
               <About theme={theme} />
               <Roadmap theme={theme} />
               <Process theme={theme} />
               <DeviceShowcase theme={theme} />
+              <TechCarousel theme={theme} />
               <Guarantees theme={theme} />
-              <Services theme={theme} onPackageClick={(pkg) => { setChatInitialPackage(pkg); setIsChatOpen(true); }} />
+              <Services theme={theme} onPackageClick={(pkg) => { setChatInitialPackage(pkg); setQuestionnaireData(null); setIsChatOpen(true); }} />
               <Testimonials theme={theme} />
               <FAQ theme={theme} />
               <ContactForm theme={theme} />
@@ -171,6 +193,7 @@ const App: React.FC = () => {
         setIsOpen={setIsChatOpen}
         initialPackage={chatInitialPackage}
         setInitialPackage={setChatInitialPackage}
+        questionnaireData={questionnaireData}
       />
       <CookieBanner theme={theme} />
     </div>

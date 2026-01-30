@@ -6,6 +6,7 @@ import { ArrowRight, Sparkles, Code2, Rocket } from 'lucide-react';
 interface HeroProps {
   theme: 'dark' | 'light';
   onShowMetodologia: () => void;
+  onOpenQuestionnaire: () => void;
 }
 
 const PHRASES = [
@@ -16,7 +17,7 @@ const PHRASES = [
   "Conectam."
 ];
 
-export const Hero: React.FC<HeroProps> = ({ theme, onShowMetodologia }) => {
+export const Hero: React.FC<HeroProps> = ({ theme, onShowMetodologia, onOpenQuestionnaire }) => {
   const [index, setIndex] = useState(0);
   const isDark = theme === 'dark';
 
@@ -31,17 +32,22 @@ export const Hero: React.FC<HeroProps> = ({ theme, onShowMetodologia }) => {
     <section id="home" className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden min-h-screen flex items-center">
       <div className="absolute inset-0 -z-20 overflow-hidden">
         <motion.div
-          animate={{ scale: [1, 1.1, 1] }}
-          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
           className="absolute inset-0 w-full h-full"
         >
-          <img
-            src="/img/cod.jpg"
-            alt="Nexus Background"
+          <video
+            autoPlay
+            loop
+            muted
+            playsInline
             className="w-full h-full object-cover"
-          />
+          >
+            <source src="/video/nexusvideo.mp4" type="video/mp4" />
+          </video>
         </motion.div>
-        <div className={`absolute inset-0 backdrop-blur-[3px] ${isDark ? 'bg-slate-950/70' : 'bg-slate-50/60'}`} />
+        <div className={`absolute inset-0 backdrop-blur-[2px] ${isDark ? 'bg-slate-950/70' : 'bg-slate-50/60'}`} />
       </div>
 
       <motion.div
@@ -99,14 +105,12 @@ export const Hero: React.FC<HeroProps> = ({ theme, onShowMetodologia }) => {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
-          <a
-            href="https://wa.me/5515996901137"
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            onClick={onOpenQuestionnaire}
             className="w-full sm:w-auto px-8 py-4 gradient-bg rounded-2xl font-bold text-lg flex items-center justify-center gap-2 text-white shadow-xl shadow-indigo-600/30 hover:shadow-indigo-600/50 transition-all hover:-translate-y-1 active:scale-95"
           >
             Quero meu site <ArrowRight className="w-5 h-5" />
-          </a>
+          </button>
           <button
             onClick={onShowMetodologia}
             className={`w-full sm:w-auto px-8 py-4 rounded-2xl font-bold text-lg transition-all ${isDark ? 'glass border-white/20 text-white hover:bg-white/10' : 'bg-white border-2 border-slate-200 text-slate-700 hover:bg-slate-50 shadow-sm'}`}
