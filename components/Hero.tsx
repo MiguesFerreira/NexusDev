@@ -37,7 +37,7 @@ export const Hero: React.FC<HeroProps> = ({ theme, onShowMetodologia }) => {
           className="absolute inset-0 w-full h-full"
         >
           <img
-            src="public/img/cod.jpg"
+            src="/img/cod.jpg"
             alt="Nexus Background"
             className="w-full h-full object-cover"
           />
