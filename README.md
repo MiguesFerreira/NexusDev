@@ -6,7 +6,7 @@ NexusDev é uma agência digital focada em criar **sites e landing pages moderna
 
 ## 🌐 Projeto Online
 
-Acesse o site: https://nexus-dev-two.vercel.app/
+Acesse o site: https://nexus-dev-contato.netlify.app/
 
 ---
 
