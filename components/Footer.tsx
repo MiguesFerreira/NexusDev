@@ -87,7 +87,9 @@ export const Footer: React.FC<FooterProps> = ({ theme, onShowHome, onShowPortfol
                   { label: "Home", action: onShowHome },
                   { label: "Sobre", action: () => { onShowHome?.(); setTimeout(() => document.getElementById('sobre')?.scrollIntoView({ behavior: 'smooth' }), 100); } },
                   { label: "Pacotes", action: () => { onShowHome?.(); setTimeout(() => document.getElementById('serviços')?.scrollIntoView({ behavior: 'smooth' }), 100); } },
+                  { label: "Depoimentos", action: () => { onShowHome?.(); setTimeout(() => document.getElementById('depoimentos')?.scrollIntoView({ behavior: 'smooth' }), 100); } },
                   { label: "FAQ", action: () => { onShowHome?.(); setTimeout(() => document.getElementById('faq')?.scrollIntoView({ behavior: 'smooth' }), 100); } },
+                  { label: "Contato", action: () => { onShowHome?.(); setTimeout(() => document.getElementById('contato')?.scrollIntoView({ behavior: 'smooth' }), 100); } },
                   { label: "Portfólio", action: onShowPortfolio },
                 ].map((link, i) => (
                   <li key={i}>

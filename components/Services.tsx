@@ -87,7 +87,7 @@ const PackageCard: React.FC<PackageCardProps> = ({ pkg, idx, compact = false, is
         scale: 1.04,
         transition: { type: "spring", stiffness: 400, damping: 25 }
       }}
-      viewport={{ once: true }}
+      viewport={{ once: false, amount: 0.1 }}
       className={`relative flex flex-col rounded-[2.5rem] transition-colors duration-300 group border z-10 hover:z-20 ${compact ? 'p-6 max-w-lg mx-auto' : 'p-8'
         } ${pkg.isPopular
           ? (isDark ? 'bg-indigo-950/30 border-indigo-500/50 shadow-2xl' : 'bg-white border-indigo-200 shadow-xl')
@@ -135,6 +135,7 @@ export const Services: React.FC<ServicesProps> = ({ theme, onPackageClick }) => 
           <motion.h2
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: false, amount: 0.3 }}
             className={`text-4xl md:text-5xl lg:text-6xl font-black mb-6 ${isDark ? 'text-white' : 'text-slate-900'}`}
           >
             Nossos <span className="gradient-text">Pacotes</span>

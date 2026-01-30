@@ -97,7 +97,7 @@ export const Navbar: React.FC<NavbarProps> = ({ scrolled, theme, activeView, tog
             onClick={onOpenChat}
             className={`hidden sm:flex px-6 py-2.5 gradient-bg rounded-full text-sm font-bold text-white items-center gap-2 hover:opacity-90 transition-all shadow-lg active:scale-95 ${!scrolled && 'shadow-none'}`}
           >
-            <Headphones size={18} /> Fale comigo
+            <Headphones size={18} /> Fale Conosco
           </button>
 
           <button

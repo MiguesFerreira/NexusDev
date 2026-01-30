@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ExternalLink, Github, Code, Palette, Smartphone, Layout } from 'lucide-react';
+import { Github, Code, Palette, Smartphone, Layout } from 'lucide-react';
 
 interface PortfolioProps {
   theme: 'dark' | 'light';
@@ -45,7 +45,8 @@ export const PortfolioPage: React.FC<PortfolioProps> = ({ theme }) => {
       <div className="text-center mb-16">
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: false }}
           className="inline-block px-4 py-1.5 rounded-full gradient-bg text-[10px] font-black uppercase tracking-widest text-white mb-4"
         >
           Nossas Criações
@@ -61,35 +62,27 @@ export const PortfolioPage: React.FC<PortfolioProps> = ({ theme }) => {
           <motion.div
             key={project.title}
             initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, amount: 0.1 }}
             transition={{ delay: idx * 0.1 }}
             className={`group relative overflow-hidden rounded-[2.5rem] border transition-all duration-500 ${isDark ? 'bg-slate-900/50 border-white/5' : 'bg-white border-slate-200 shadow-xl'}`}
           >
             <div className="aspect-video overflow-hidden">
-              <img 
-                src={project.image} 
-                alt={project.title} 
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
+              <img
+                src={project.image}
+                alt={project.title}
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-8">
                 <div className="flex gap-4">
                   {/* GitHub */}
-                  <a 
-                    href="https://github.com/" 
-                    target="_blank" 
+                  <a
+                    href="https://github.com/"
+                    target="_blank"
                     rel="noopener noreferrer"
                     className="p-3 rounded-full bg-white/10 text-white hover:bg-white/20 backdrop-blur-md transition-colors"
                   >
                     <Github size={20} />
-                  </a>
-                  {/* External Link placeholder */}
-                  <a 
-                    href="#" 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="p-3 rounded-full bg-indigo-600 text-white hover:bg-indigo-500 transition-colors"
-                  >
-                    <ExternalLink size={20} />
                   </a>
                 </div>
               </div>
@@ -119,7 +112,7 @@ export const PortfolioPage: React.FC<PortfolioProps> = ({ theme }) => {
 
       {/* Expertise Section inside Portfolio */}
       <div className="mt-32 grid md:grid-cols-4 gap-8">
-        {[ 
+        {[
           { icon: Palette, title: "UI Design", val: "99%" },
           { icon: Smartphone, title: "Mobile", val: "100%" },
           { icon: Code, title: "Clean Code", val: "95%" },

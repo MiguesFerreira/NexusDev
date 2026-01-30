@@ -28,7 +28,7 @@ export const Hero: React.FC<HeroProps> = ({ theme, onShowMetodologia }) => {
   }, []);
 
   return (
-    <section className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden min-h-screen flex items-center">
+    <section id="home" className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden min-h-screen flex items-center">
       {/* Cinematic Animated Background */}
       <div className="absolute inset-0 -z-20 overflow-hidden">
         <motion.div
@@ -46,11 +46,18 @@ export const Hero: React.FC<HeroProps> = ({ theme, onShowMetodologia }) => {
         <div className={`absolute inset-0 backdrop-blur-[3px] ${isDark ? 'bg-slate-950/70' : 'bg-slate-50/60'}`} />
       </div>
 
-      <div className="container mx-auto px-6 text-center relative z-10">
+      <motion.div
+        className="container mx-auto px-6 text-center relative z-10"
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: false, amount: 0.3 }}
+        transition={{ duration: 0.8 }}
+      >
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
+          viewport={{ once: false }}
           className={`inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium mb-8 ${isDark ? 'glass border-white/10 text-indigo-300' : 'bg-indigo-50 border border-indigo-100 text-indigo-600'}`}
         >
           <span className="shrink-0"><Sparkles className="w-4 h-4" /></span>
@@ -79,7 +86,8 @@ export const Hero: React.FC<HeroProps> = ({ theme, onShowMetodologia }) => {
 
         <motion.p
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false }}
           transition={{ duration: 0.6, delay: 0.2 }}
           className={`text-base sm:text-lg md:text-xl max-w-2xl mx-auto mb-12 leading-relaxed ${isDark ? 'text-slate-100' : 'text-slate-700'}`}
         >
@@ -88,7 +96,8 @@ export const Hero: React.FC<HeroProps> = ({ theme, onShowMetodologia }) => {
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false }}
           transition={{ duration: 0.6, delay: 0.3 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
@@ -107,7 +116,7 @@ export const Hero: React.FC<HeroProps> = ({ theme, onShowMetodologia }) => {
             Nossa Metodologia
           </button>
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   );
 };

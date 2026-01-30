@@ -65,7 +65,7 @@ export const Metodologia: React.FC<MetodologiaProps> = ({ theme, onBack }) => {
                 key={i}
                 initial={{ opacity: 0, x: -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
+                viewport={{ once: false, amount: 0.2 }}
                 className="flex flex-col md:flex-row gap-8 items-start"
               >
                 <div className="flex-shrink-0 w-16 h-16 gradient-bg rounded-2xl flex items-center justify-center text-white shadow-xl">
@@ -80,36 +80,36 @@ export const Metodologia: React.FC<MetodologiaProps> = ({ theme, onBack }) => {
           </div>
         </div>
       </div>
-  <div className="mt-16 p-12 rounded-[2.5rem] text-center">
-  <h4 className={`text-2xl font-bold mb-6 ${isDark ? 'text-white' : 'text-slate-900'}`}>🔥 Nosso Compromisso</h4>
-  <br />
-  
-  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
-    {[
-      { icon: Shield, t: "Clareza" },
-      { icon: Send, t: "Direto" },
-      { icon: Zap, t: "Moderno" },
-      { icon: Rocket, t: "Resultado" }
-    ].map((item, i) => (
-      <div key={i} className="flex flex-col items-center gap-1">
-        <div className="text-indigo-500"><item.icon size={28} /></div>
-        <span className={`text-xs font-bold uppercase tracking-widest ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>{item.t}</span>
+      <div className="mt-16 p-12 rounded-[2.5rem] text-center">
+        <h4 className={`text-2xl font-bold mb-6 ${isDark ? 'text-white' : 'text-slate-900'}`}>🔥 Nosso Compromisso</h4>
+        <br />
+
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+          {[
+            { icon: Shield, t: "Clareza" },
+            { icon: Send, t: "Direto" },
+            { icon: Zap, t: "Moderno" },
+            { icon: Rocket, t: "Resultado" }
+          ].map((item, i) => (
+            <div key={i} className="flex flex-col items-center gap-1">
+              <div className="text-indigo-500"><item.icon size={28} /></div>
+              <span className={`text-xs font-bold uppercase tracking-widest ${isDark ? 'text-slate-400' : 'text-slate-500'}`}>{item.t}</span>
+            </div>
+          ))}
+        </div>
+
+        <p className={`text-lg italic mb-10 ${isDark ? 'text-slate-300' : 'text-slate-700'}`}>
+          "Na Nexus Dev, tecnologia e estratégia caminham juntas."
+        </p>
+
+        <a
+          href="https://wa.me/5515996901137"
+          target="_blank"
+          className="inline-flex px-10 py-5 gradient-bg text-white font-bold rounded-2xl shadow-xl hover:-translate-y-1 transition-all"
+        >
+          📩 Vamos tirar seu projeto do papel?
+        </a>
       </div>
-    ))}
-  </div>
-  
-  <p className={`text-lg italic mb-10 ${isDark ? 'text-slate-300' : 'text-slate-700'}`}>
-    "Na Nexus Dev, tecnologia e estratégia caminham juntas."
-  </p>
-  
-  <a
-    href="https://wa.me/5515996901137"
-    target="_blank"
-    className="inline-flex px-10 py-5 gradient-bg text-white font-bold rounded-2xl shadow-xl hover:-translate-y-1 transition-all"
-  >
-    📩 Vamos tirar seu projeto do papel?
-  </a>
-</div>
 
     </div>
   );

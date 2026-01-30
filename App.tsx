@@ -13,6 +13,7 @@ import { ContactForm } from './components/ContactForm';
 import { CookieBanner } from './components/CookieBanner';
 import { Metodologia } from './components/Metodologia';
 import { SplashScreen } from './components/SplashScreen';
+
 import { AnimatePresence, motion, useMotionValue } from 'framer-motion';
 
 const CustomCursor = () => {
@@ -40,7 +41,7 @@ const CustomCursor = () => {
         <div className="absolute left-0 top-1/2 -translate-y-1/2 w-2 h-0.5 bg-indigo-500/50" />
         <div className="absolute right-0 top-1/2 -translate-y-1/2 w-2 h-0.5 bg-indigo-500/50" />
       </motion.div>
-      
+
       {/* Ponto de Precisão - Resposta Instantânea */}
       <motion.div
         className="fixed top-0 left-0 w-3 h-3 bg-white rounded-full pointer-events-none z-[9999] hidden lg:block shadow-[0_0_10px_rgba(255,255,255,0.8)]"
@@ -52,12 +53,12 @@ const CustomCursor = () => {
 
 const LightweightBackground = () => (
   <div className="fixed inset-0 pointer-events-none -z-50 bg-[#020617]">
-    <div 
-      className="absolute inset-0 opacity-[0.02]" 
-      style={{ 
+    <div
+      className="absolute inset-0 opacity-[0.02]"
+      style={{
         backgroundImage: `linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)`,
         backgroundSize: '40px 40px'
-      }} 
+      }}
     />
     <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_20%_20%,_rgba(67,56,202,0.08),_transparent_50%),_radial-gradient(circle_at_80%_80%,_rgba(107,33,168,0.08),_transparent_50%)]" />
   </div>
@@ -82,8 +83,12 @@ const App: React.FC = () => {
   }, []);
 
   const navigateTo = (view: 'home' | 'portfolio' | 'metodologia') => {
-    setCurrentView(view);
-    window.scrollTo({ top: 0, behavior: 'auto' }); 
+    if (currentView === view) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      setCurrentView(view);
+      window.scrollTo({ top: 0, behavior: 'auto' });
+    }
   };
 
   const isDark = theme === 'dark';
@@ -91,23 +96,23 @@ const App: React.FC = () => {
   return (
     <div className={`relative min-h-screen ${isDark ? 'text-slate-100' : 'bg-slate-50 text-slate-900'}`}>
       <CustomCursor />
-      
+
       <AnimatePresence>
         {loading && <SplashScreen />}
       </AnimatePresence>
 
       <LightweightBackground />
 
-      <Navbar 
-        scrolled={scrolled} 
-        theme={theme} 
-        toggleTheme={() => setTheme(t => t === 'dark' ? 'light' : 'dark')} 
+      <Navbar
+        scrolled={scrolled}
+        theme={theme}
+        toggleTheme={() => setTheme(t => t === 'dark' ? 'light' : 'dark')}
         activeView={currentView}
         onShowHome={() => navigateTo('home')}
         onShowPortfolio={() => navigateTo('portfolio')}
         onOpenChat={() => setIsChatOpen(true)}
       />
-      
+
       <main className="relative z-10">
         <AnimatePresence mode="wait">
           {currentView === 'home' && (
@@ -136,18 +141,18 @@ const App: React.FC = () => {
         </AnimatePresence>
       </main>
 
-      <Footer 
-        theme={theme} 
-        onShowHome={() => navigateTo('home')} 
-        onShowPortfolio={() => navigateTo('portfolio')} 
+      <Footer
+        theme={theme}
+        onShowHome={() => navigateTo('home')}
+        onShowPortfolio={() => navigateTo('portfolio')}
         onOpenChat={() => setIsChatOpen(true)}
       />
-      
-      <Chatbot 
-        isOpen={isChatOpen} 
-        setIsOpen={setIsChatOpen} 
-        initialPackage={chatInitialPackage} 
-        setInitialPackage={setChatInitialPackage} 
+
+      <Chatbot
+        isOpen={isChatOpen}
+        setIsOpen={setIsChatOpen}
+        initialPackage={chatInitialPackage}
+        setInitialPackage={setChatInitialPackage}
       />
       <CookieBanner theme={theme} />
     </div>

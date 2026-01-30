@@ -1,12 +1,33 @@
 
 import React from 'react';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { Shield, Target, Users, Zap } from 'lucide-react';
 
 interface AboutProps { theme: 'dark' | 'light'; }
 
 export const About: React.FC<AboutProps> = ({ theme }) => {
   const isDark = theme === 'dark';
+  const containerRef = React.useRef(null);
+  const [isHovered, setIsHovered] = React.useState(false);
+
+  // Parallax Logic
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  });
+
+  // "From Above" -> Starts at -100px (or similar) when at top, moves down as we scroll?
+  // User said: "scroll down -> comes from above".
+  // Means at start (0%), y should be negative (above). At center (50%), y should be 0.
+  // "scroll up -> goes back below".
+  // This implies Y motion.
+  const yParallax = useTransform(scrollYProgress, [0, 1], [-150, 150]);
+  // Starts -150 (above), moves to +150 (below) as we scroll down to end.
+  // Wait, if I scroll down, 0->1. -150 -> 150.
+  // So it comes from above (-150) and goes down (+150).
+  // "Scroll up -> goes back below". If I scroll UP (1->0), it goes from 150 -> -150.
+  // This matches "comes from above when scrolling down".
+
   const stats = [
     { icon: Target, title: 'Objetivo', desc: 'Sua conversão é nossa prioridade absoluta.' },
     { icon: Zap, title: 'Velocidade', desc: 'Performance otimizada para Core Web Vitals.' },
@@ -15,13 +36,15 @@ export const About: React.FC<AboutProps> = ({ theme }) => {
   ];
 
   return (
-    <section id="sobre" className="py-24 relative overflow-hidden">
+    <section ref={containerRef} id="sobre" className="py-24 relative overflow-hidden">
       <div className="container mx-auto px-6">
-        <div className="flex flex-col lg:flex-row items-center gap-16">
-          <motion.div 
+        <div className="flex flex-col-reverse lg:flex-row items-center gap-12 lg:gap-16">
+
+          {/* Text Column (Left on Desktop, Bottom on Mobile) */}
+          <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: false, amount: 0.3 }}
             transition={{ duration: 0.8 }}
             className="lg:w-1/2"
           >
@@ -31,7 +54,7 @@ export const About: React.FC<AboutProps> = ({ theme }) => {
             <p className={`text-lg mb-8 leading-relaxed ${isDark ? 'text-slate-300' : 'text-slate-600'}`}>
               Nascemos com a missão de elevar o padrão da web brasileira. Não entregamos apenas código; entregamos autoridade digital.
             </p>
-            
+
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-8">
               {stats.map((stat, i) => (
                 <div key={i} className="flex gap-4">
@@ -46,26 +69,70 @@ export const About: React.FC<AboutProps> = ({ theme }) => {
               ))}
             </div>
           </motion.div>
-          
-          <motion.div 
-            initial={{ opacity: 0, scale: 0.9 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            className="lg:w-1/2 relative"
-          >
-            <motion.div 
-              animate={{ y: [0, -15, 0] }}
-              transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-              className={`relative z-10 rounded-[3rem] overflow-hidden border shadow-2xl ${isDark ? 'border-white/10' : 'border-slate-200'}`}
+
+          {/* Image Column (Right on Desktop, Hidden on Mobile) */}
+          <div className="hidden lg:flex lg:w-1/2 relative h-[700px] items-center justify-center">
+            <motion.div
+              style={{ y: yParallax }}
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: false, amount: 0.2 }}
+              transition={{ duration: 1.2, ease: "easeOut" }}
+              className={`relative z-10 drop-shadow-2xl w-[180%] max-w-none flex items-center justify-center`}
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
             >
-              <img 
-                 src="/img/nexus.png" 
-                alt="Nexus Dev Brand Identity" 
-                className="w-full h-auto object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-tr from-indigo-600/20 to-transparent pointer-events-none" />
+              <div className="relative w-full h-full flex items-center justify-center">
+                {/* Closed Notebook */}
+                <motion.div
+                  animate={{
+                    rotate: isHovered ? -5 : [-1.5, 1.5, -1.5],
+                    x: isHovered ? -150 : 0,
+                    opacity: isHovered ? 0.4 : 1,
+                    scale: isHovered ? 1.1 : 1.3, // Aumentado o escala base e hover
+                    filter: isHovered ? 'blur(4px)' : 'blur(0px)'
+                  }}
+                  transition={{
+                    rotate: { duration: 4, repeat: Infinity, ease: "easeInOut" },
+                    default: { duration: 1.5, ease: [0.22, 1, 0.36, 1] }
+                  }}
+                  className="absolute z-20"
+                >
+                  <img
+                    src="/img/nexusnote.png"
+                    alt="Nexus Dev Notebook Closed"
+                    className="w-[1400px] h-auto object-contain translate-x-23" // move 6rem para a direita
+                  />
+
+                </motion.div>
+
+                {/* Open Notebook */}
+                <motion.div
+                  initial={{ opacity: 0, x: 300, scale: 0.8, rotate: 10 }}
+                  animate={{
+                    opacity: isHovered ? 1 : 0,
+                    x: isHovered ? 150 : 400,
+                    scale: isHovered ? 1.4 : 0.8,
+                    rotate: isHovered ? 0 : 15,
+                  }}
+                  transition={{
+                    duration: 1.8,
+                    ease: [0.22, 1, 0.36, 1]
+                  }}
+                  className="absolute z-30"
+                >
+                  <img
+                    src="/img/nexusnoteaberto.png"
+                    alt="Nexus Dev Notebook Open"
+                    className="w-[700px] h-auto object-contain drop-shadow-[0_0_80px_rgba(99,102,241,0.4)] translate-x-23"
+                  />
+
+                </motion.div>
+              </div>
             </motion.div>
-            <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] blur-[120px] -z-10 opacity-40 ${isDark ? 'bg-indigo-600/30' : 'bg-indigo-400/20'}`} />
-          </motion.div>
+            {/* Background Glow Effect */}
+            <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] blur-[100px] -z-10 opacity-30 ${isDark ? 'bg-indigo-600/40' : 'bg-indigo-400/30'}`} />
+          </div>
         </div>
       </div>
     </section>
