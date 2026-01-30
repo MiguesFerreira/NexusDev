@@ -29,7 +29,6 @@ export const Hero: React.FC<HeroProps> = ({ theme, onShowMetodologia }) => {
 
   return (
     <section id="home" className="relative pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden min-h-screen flex items-center">
-      {/* Cinematic Animated Background */}
       <div className="absolute inset-0 -z-20 overflow-hidden">
         <motion.div
           animate={{ scale: [1, 1.1, 1] }}
@@ -42,7 +41,6 @@ export const Hero: React.FC<HeroProps> = ({ theme, onShowMetodologia }) => {
             className="w-full h-full object-cover"
           />
         </motion.div>
-        {/* Blur Layer Overlay */}
         <div className={`absolute inset-0 backdrop-blur-[3px] ${isDark ? 'bg-slate-950/70' : 'bg-slate-50/60'}`} />
       </div>
 

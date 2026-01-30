@@ -8,7 +8,6 @@ interface ServicesProps {
   onPackageClick: (pkg: string) => void;
 }
 
-// --- PACKAGES atualizado ---
 const PACKAGES: ServicePackage[] = [
   {
     id: 'basico',
@@ -46,7 +45,7 @@ const PACKAGES: ServicePackage[] = [
     price: 'R$ 3.500,00',
     maintenance: 'R$ 500,00/mês',
     icon: <Cpu className="w-8 h-8" />,
-    isPopular: true // habilita a badge “Mais Seguro”
+    isPopular: true
   }
 ];
 
@@ -61,7 +60,6 @@ const EXTRA_PACKAGE: ServicePackage = {
   isExtra: true
 };
 
-// --- PackageCard atualizado ---
 interface PackageCardProps {
   pkg: ServicePackage;
   idx: number;
@@ -71,11 +69,10 @@ interface PackageCardProps {
 }
 
 const PackageCard: React.FC<PackageCardProps> = ({ pkg, idx, compact = false, isDark, onPackageClick }) => {
-  // Define o texto da badge apenas para pacotes com destaque
   let badgeText = '';
   if (pkg.isPopular) {
     if (pkg.id === 'profissional') badgeText = 'Mais Procurado';
-    else if (pkg.id === 'react') badgeText = 'Mais Seguro'; // Pacote React
+    else if (pkg.id === 'react') badgeText = 'Mais Seguro';
   }
 
   return (
@@ -124,7 +121,6 @@ const PackageCard: React.FC<PackageCardProps> = ({ pkg, idx, compact = false, is
   );
 };
 
-// --- Services permanece igual ---
 export const Services: React.FC<ServicesProps> = ({ theme, onPackageClick }) => {
   const isDark = theme === 'dark';
 

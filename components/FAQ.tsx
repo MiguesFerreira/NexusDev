@@ -22,7 +22,6 @@ export const FAQ: React.FC<FAQProps> = ({ theme }) => {
   return (
     <section id="faq" className="py-24 container mx-auto px-6 relative">
       <div className="flex flex-col lg:flex-row gap-16 items-start">
-        {/* Sticky Sidebar */}
         <div className="lg:w-1/3 lg:sticky lg:top-32 self-start">
           <motion.div 
             initial={{ opacity: 0, x: -30 }}
@@ -43,7 +42,6 @@ export const FAQ: React.FC<FAQProps> = ({ theme }) => {
           </motion.div>
         </div>
 
-        {/* FAQ List */}
         <div className="lg:w-2/3 space-y-4">
           {FAQS.map((item, idx) => (
             <motion.div 

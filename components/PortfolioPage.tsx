@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Github, Code, Palette, Smartphone, Layout } from 'lucide-react';
 
@@ -49,9 +49,13 @@ export const PortfolioPage: React.FC<PortfolioProps> = ({ theme }) => {
           viewport={{ once: false }}
           className="inline-block px-4 py-1.5 rounded-full gradient-bg text-[10px] font-black uppercase tracking-widest text-white mb-4"
         >
-          Nossas Criações
+          Meus Projetos
         </motion.div>
-        <h1 className={`text-5xl md:text-7xl font-black mb-6 ${isDark ? 'text-white' : 'text-slate-900'}`}>Portfólio <span className="gradient-text">Exclusivo</span></h1>
+
+        <h1 className={`text-5xl md:text-7xl font-black mb-6 ${isDark ? 'text-white' : 'text-slate-900'}`}>
+          Projetos <span className="gradient-text">Recentes</span>
+        </h1>
+
         <p className={`max-w-2xl mx-auto text-lg ${isDark ? 'text-slate-400' : 'text-slate-600'}`}>
           Confira alguns dos projetos que transformaram a presença digital dos nossos clientes através de design de alto impacto.
         </p>
@@ -75,7 +79,6 @@ export const PortfolioPage: React.FC<PortfolioProps> = ({ theme }) => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-8">
                 <div className="flex gap-4">
-                  {/* GitHub */}
                   <a
                     href="https://github.com/"
                     target="_blank"
@@ -110,7 +113,6 @@ export const PortfolioPage: React.FC<PortfolioProps> = ({ theme }) => {
         ))}
       </div>
 
-      {/* Expertise Section inside Portfolio */}
       <div className="mt-32 grid md:grid-cols-4 gap-8">
         {[
           { icon: Palette, title: "UI Design", val: "99%" },

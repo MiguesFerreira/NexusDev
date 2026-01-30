@@ -15,7 +15,6 @@ export const Footer: React.FC<FooterProps> = ({ theme, onShowHome, onShowPortfol
 
   return (
     <footer className="relative mt-20 group">
-      {/* Transição Geométrica de Topo (Shape Divider) */}
       <div
         className={`absolute top-0 left-0 w-full h-32 -translate-y-full overflow-hidden pointer-events-none`}
       >
@@ -25,10 +24,8 @@ export const Footer: React.FC<FooterProps> = ({ theme, onShowHome, onShowPortfol
         />
       </div>
 
-      {/* Container Principal */}
       <div className={`relative pt-20 pb-10 transition-colors duration-700 ${isDark ? 'bg-black text-white' : 'bg-slate-50 text-slate-900'
         }`}>
-        {/* Efeito de Brilho de Fundo (Aurora) */}
         <div className="absolute bottom-0 right-0 w-full h-full overflow-hidden pointer-events-none opacity-20">
           <div className="absolute bottom-[-20%] right-[-10%] w-[60%] h-[80%] bg-indigo-600 blur-[150px] rounded-full" />
           <div className="absolute top-[-20%] left-[-10%] w-[40%] h-[60%] bg-purple-900 blur-[150px] rounded-full" />
@@ -37,7 +34,6 @@ export const Footer: React.FC<FooterProps> = ({ theme, onShowHome, onShowPortfol
         <div className="container mx-auto px-6 relative z-10">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-16 lg:gap-8 mb-20">
 
-            {/* Branding & Bio */}
             <div className="space-y-6 flex flex-col items-center md:items-start text-center md:text-left">
               <div
                 className="flex items-center gap-3 cursor-pointer group/logo"
@@ -79,13 +75,14 @@ export const Footer: React.FC<FooterProps> = ({ theme, onShowHome, onShowPortfol
               </div>
             </div>
 
-            {/* Links Rápidos - Coluna Explorar levemente para a esquerda */}
             <div className="flex flex-col items-start md:items-start text-left lg:pl-20">
               <h4 className="text-xs font-black uppercase tracking-[0.2em] mb-8 text-indigo-500">Explorar</h4>
               <ul className="flex flex-col gap-5">
                 {[
                   { label: "Home", action: onShowHome },
                   { label: "Sobre", action: () => { onShowHome?.(); setTimeout(() => document.getElementById('sobre')?.scrollIntoView({ behavior: 'smooth' }), 100); } },
+                  { label: "Map", action: () => { onShowHome?.(); setTimeout(() => document.getElementById('map')?.scrollIntoView({ behavior: 'smooth' }), 100); } },
+                  { label: "Tech", action: () => { onShowHome?.(); setTimeout(() => document.getElementById('tecnologia')?.scrollIntoView({ behavior: 'smooth' }), 100); } },
                   { label: "Pacotes", action: () => { onShowHome?.(); setTimeout(() => document.getElementById('serviços')?.scrollIntoView({ behavior: 'smooth' }), 100); } },
                   { label: "Depoimentos", action: () => { onShowHome?.(); setTimeout(() => document.getElementById('depoimentos')?.scrollIntoView({ behavior: 'smooth' }), 100); } },
                   { label: "FAQ", action: () => { onShowHome?.(); setTimeout(() => document.getElementById('faq')?.scrollIntoView({ behavior: 'smooth' }), 100); } },
@@ -106,8 +103,7 @@ export const Footer: React.FC<FooterProps> = ({ theme, onShowHome, onShowPortfol
               </ul>
             </div>
 
-            {/* Contato Direct */}
-            <div className={`p-8 rounded-[2.5rem] border relative overflow-hidden group/contact ${isDark ? 'bg-white/5 border-white/10' : 'bg-indigo-50/50 border-indigo-100'
+            <div className={`p-8 rounded-[2.5rem] border relative overflow-hidden group/contact self-start ${isDark ? 'bg-white/5 border-white/10' : 'bg-indigo-50/50 border-indigo-100'
               }`}>
               <div className="absolute top-0 right-0 p-4 opacity-10 group-hover/contact:opacity-20 transition-opacity">
                 <Globe size={64} className="text-indigo-500" />
@@ -132,7 +128,6 @@ export const Footer: React.FC<FooterProps> = ({ theme, onShowHome, onShowPortfol
             </div>
           </div>
 
-          {/* Rodapé Inferior */}
           <div className={`pt-10 border-t flex flex-col md:flex-row items-center justify-between gap-6 ${isDark ? 'border-white/5' : 'border-slate-200'
             }`}>
             <div className="flex items-center gap-4">

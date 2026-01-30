@@ -1,5 +1,4 @@
-
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronLeft, Zap, Target, Palette, Cpu, Rocket, Shield, Send } from 'lucide-react';
 
@@ -80,6 +79,7 @@ export const Metodologia: React.FC<MetodologiaProps> = ({ theme, onBack }) => {
           </div>
         </div>
       </div>
+
       <div className="mt-16 p-12 rounded-[2.5rem] text-center">
         <h4 className={`text-2xl font-bold mb-6 ${isDark ? 'text-white' : 'text-slate-900'}`}>🔥 Nosso Compromisso</h4>
         <br />
@@ -106,11 +106,9 @@ export const Metodologia: React.FC<MetodologiaProps> = ({ theme, onBack }) => {
           href="https://wa.me/5515996901137"
           target="_blank"
           className="inline-flex px-10 py-5 gradient-bg text-white font-bold rounded-2xl shadow-xl hover:-translate-y-1 transition-all"
-        >
-          📩 Vamos tirar seu projeto do papel?
+        >Vamos tirar seu projeto do papel?
         </a>
       </div>
-
     </div>
   );
 };

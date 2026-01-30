@@ -13,6 +13,10 @@ import { ContactForm } from './components/ContactForm';
 import { CookieBanner } from './components/CookieBanner';
 import { Metodologia } from './components/Metodologia';
 import { SplashScreen } from './components/SplashScreen';
+import { DeviceShowcase } from './components/DeviceShowcase';
+import { Process } from './components/Process';
+import { Guarantees } from './components/Guarantees';
+import { Roadmap } from './components/Roadmap';
 
 import { AnimatePresence, motion, useMotionValue } from 'framer-motion';
 
@@ -82,6 +86,15 @@ const App: React.FC = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const titles = {
+      home: "NexusDev - Home",
+      portfolio: "NexusDev - Portfólio",
+      metodologia: "NexusDev - Metodologia"
+    };
+    document.title = titles[currentView] || "NexusDev";
+  }, [currentView]);
+
   const navigateTo = (view: 'home' | 'portfolio' | 'metodologia') => {
     if (currentView === view) {
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -115,10 +128,15 @@ const App: React.FC = () => {
 
       <main className="relative z-10">
         <AnimatePresence mode="wait">
+
           {currentView === 'home' && (
             <motion.div key="home" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
               <Hero theme={theme} onShowMetodologia={() => navigateTo('metodologia')} />
               <About theme={theme} />
+              <Roadmap theme={theme} />
+              <Process theme={theme} />
+              <DeviceShowcase theme={theme} />
+              <Guarantees theme={theme} />
               <Services theme={theme} onPackageClick={(pkg) => { setChatInitialPackage(pkg); setIsChatOpen(true); }} />
               <Testimonials theme={theme} />
               <FAQ theme={theme} />

@@ -8,25 +8,15 @@ interface AboutProps { theme: 'dark' | 'light'; }
 export const About: React.FC<AboutProps> = ({ theme }) => {
   const isDark = theme === 'dark';
   const containerRef = React.useRef(null);
+
   const [isHovered, setIsHovered] = React.useState(false);
 
-  // Parallax Logic
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start end", "end start"]
   });
 
-  // "From Above" -> Starts at -100px (or similar) when at top, moves down as we scroll?
-  // User said: "scroll down -> comes from above".
-  // Means at start (0%), y should be negative (above). At center (50%), y should be 0.
-  // "scroll up -> goes back below".
-  // This implies Y motion.
   const yParallax = useTransform(scrollYProgress, [0, 1], [-150, 150]);
-  // Starts -150 (above), moves to +150 (below) as we scroll down to end.
-  // Wait, if I scroll down, 0->1. -150 -> 150.
-  // So it comes from above (-150) and goes down (+150).
-  // "Scroll up -> goes back below". If I scroll UP (1->0), it goes from 150 -> -150.
-  // This matches "comes from above when scrolling down".
 
   const stats = [
     { icon: Target, title: 'Objetivo', desc: 'Sua conversão é nossa prioridade absoluta.' },
@@ -40,7 +30,6 @@ export const About: React.FC<AboutProps> = ({ theme }) => {
       <div className="container mx-auto px-6">
         <div className="flex flex-col-reverse lg:flex-row items-center gap-12 lg:gap-16">
 
-          {/* Text Column (Left on Desktop, Bottom on Mobile) */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -70,7 +59,6 @@ export const About: React.FC<AboutProps> = ({ theme }) => {
             </div>
           </motion.div>
 
-          {/* Image Column (Right on Desktop, Hidden on Mobile) */}
           <div className="hidden lg:flex lg:w-1/2 relative h-[700px] items-center justify-center">
             <motion.div
               style={{ y: yParallax }}
@@ -83,13 +71,12 @@ export const About: React.FC<AboutProps> = ({ theme }) => {
               onMouseLeave={() => setIsHovered(false)}
             >
               <div className="relative w-full h-full flex items-center justify-center">
-                {/* Closed Notebook */}
                 <motion.div
                   animate={{
                     rotate: isHovered ? -5 : [-1.5, 1.5, -1.5],
                     x: isHovered ? -150 : 0,
                     opacity: isHovered ? 0.4 : 1,
-                    scale: isHovered ? 1.1 : 1.3, // Aumentado o escala base e hover
+                    scale: isHovered ? 1.1 : 1.3,
                     filter: isHovered ? 'blur(4px)' : 'blur(0px)'
                   }}
                   transition={{
@@ -101,12 +88,11 @@ export const About: React.FC<AboutProps> = ({ theme }) => {
                   <img
                     src="/img/nexusnote.png"
                     alt="Nexus Dev Notebook Closed"
-                    className="w-[1400px] h-auto object-contain translate-x-23" // move 6rem para a direita
+                    className="w-[1400px] h-auto object-contain translate-x-23"
                   />
 
                 </motion.div>
 
-                {/* Open Notebook */}
                 <motion.div
                   initial={{ opacity: 0, x: 300, scale: 0.8, rotate: 10 }}
                   animate={{
@@ -130,7 +116,7 @@ export const About: React.FC<AboutProps> = ({ theme }) => {
                 </motion.div>
               </div>
             </motion.div>
-            {/* Background Glow Effect */}
+
             <div className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[140%] h-[140%] blur-[100px] -z-10 opacity-30 ${isDark ? 'bg-indigo-600/40' : 'bg-indigo-400/30'}`} />
           </div>
         </div>

@@ -73,6 +73,8 @@ export const Navbar: React.FC<NavbarProps> = ({ scrolled, theme, activeView, tog
           {!isPortfolio && (
             <>
               <NavLink href="#sobre" isDark={isDark}>Sobre</NavLink>
+              <NavLink href="#map" isDark={isDark}>Map</NavLink>
+              <NavLink href="#tecnologia" isDark={isDark}>Tech</NavLink>
               <NavLink href="#serviços" isDark={isDark}>Pacotes</NavLink>
               <NavLink href="#depoimentos" isDark={isDark}>Depoimentos</NavLink>
               <NavLink href="#faq" isDark={isDark}>FAQ</NavLink>
@@ -138,6 +140,8 @@ export const Navbar: React.FC<NavbarProps> = ({ scrolled, theme, activeView, tog
               {!isPortfolio && (
                 <>
                   <a href="#sobre" onClick={() => setIsMenuOpen(false)} className={`text-xl font-bold py-2 border-b ${isDark ? 'border-white/5 text-slate-300' : 'border-slate-100 text-slate-700'}`}>Sobre</a>
+                  <a href="#map" onClick={() => setIsMenuOpen(false)} className={`text-xl font-bold py-2 border-b ${isDark ? 'border-white/5 text-slate-300' : 'border-slate-100 text-slate-700'}`}>Map</a>
+                  <a href="#tecnologia" onClick={() => setIsMenuOpen(false)} className={`text-xl font-bold py-2 border-b ${isDark ? 'border-white/5 text-slate-300' : 'border-slate-100 text-slate-700'}`}>Tech</a>
                   <a href="#serviços" onClick={() => setIsMenuOpen(false)} className={`text-xl font-bold py-2 border-b ${isDark ? 'border-white/5 text-slate-300' : 'border-slate-100 text-slate-700'}`}>Pacotes</a>
                   <a href="#depoimentos" onClick={() => setIsMenuOpen(false)} className={`text-xl font-bold py-2 border-b ${isDark ? 'border-white/5 text-slate-300' : 'border-slate-100 text-slate-700'}`}>Depoimentos</a>
                   <a href="#faq" onClick={() => setIsMenuOpen(false)} className={`text-xl font-bold py-2 border-b ${isDark ? 'border-white/5 text-slate-300' : 'border-slate-100 text-slate-700'}`}>FAQ</a>

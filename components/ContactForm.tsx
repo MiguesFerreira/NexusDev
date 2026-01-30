@@ -40,10 +40,8 @@ ${message}
 
     const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(text)}`;
 
-    // Pequeno delay extra antes de abrir o link para o usuário ver o "Sucesso"
     setTimeout(() => {
       window.open(whatsappURL, '_blank');
-      // Resetar após abrir
       setTimeout(() => setIsSuccess(false), 3000);
     }, 1000);
   };
